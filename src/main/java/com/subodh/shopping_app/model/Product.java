@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 @Getter
 @Setter
-@AllArgsConstructor
+//@AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Entity
@@ -16,7 +16,6 @@ public class Product {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-
     private String branch;
     private BigDecimal price;
     private int inventary;
@@ -26,4 +25,13 @@ public class Product {
     private Category category;
     @OneToMany(mappedBy = "product",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Image> images;
+
+    public Product(String name, String branch, BigDecimal price, int inventary, String description, Category category) {
+        this.name = name;
+        this.branch = branch;
+        this.price = price;
+        this.inventary = inventary;
+        this.description = description;
+        this.category = category;
+    }
 }
