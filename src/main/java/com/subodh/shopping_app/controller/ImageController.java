@@ -16,10 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
+
 import org.springframework.web.multipart.MultipartFile;
 
-import java.sql.SQLClientInfoException;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -29,6 +28,7 @@ import java.util.List;
 public class ImageController {
 
     private final ImageService imageService;
+
     @PostMapping("/upload")
     public ResponseEntity<ApiResponse> saveImages(@RequestParam List<MultipartFile> files ,
                                                   @RequestParam Long productId){

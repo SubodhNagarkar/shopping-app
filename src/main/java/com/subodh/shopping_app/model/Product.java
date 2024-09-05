@@ -16,7 +16,7 @@ public class Product {
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String branch;
+    private String brand;
     private BigDecimal price;
     private int inventary;
     private String description;
@@ -28,7 +28,7 @@ public class Product {
 
     public Product(String name, String branch, BigDecimal price, int inventary, String description, Category category) {
         this.name = name;
-        this.branch = branch;
+        this.brand = brand;
         this.price = price;
         this.inventary = inventary;
         this.description = description;

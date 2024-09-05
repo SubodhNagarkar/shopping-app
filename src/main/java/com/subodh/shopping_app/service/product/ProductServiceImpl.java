@@ -10,6 +10,7 @@ import com.subodh.shopping_app.request.ProductUpdateRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +18,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService{
-    @Autowired
+
     private final ProductRepository productRepository;
 
     private final CategoryRepository categoryRepository;
@@ -73,9 +74,10 @@ public class ProductServiceImpl implements ProductService{
               .orElseThrow(() -> new ProductNotFoundException("Product Not Found"));
 
     }
+
     private Product updateexistingproduct(Product existingProduct, ProductUpdateRequest request){
         existingProduct.setName(request.getName());
-        existingProduct.setBranch(request.getBranch());
+        existingProduct.setBrand(request.getBranch());
         existingProduct.setPrice(request.getPrice());
         existingProduct.setInventary(request.getInventary());
         existingProduct.setDescription(request.getDescription());

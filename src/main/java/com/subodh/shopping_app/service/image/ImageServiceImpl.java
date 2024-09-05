@@ -1,10 +1,12 @@
 package com.subodh.shopping_app.service.image;
 
 import com.subodh.shopping_app.dto.ImageDto;
-import com.subodh.shopping_app.exceptions.ResourseNotFound;
+import com.subodh.shopping_app.exceptions.ResourceNotFoundException;
+
 import com.subodh.shopping_app.model.Image;
 import com.subodh.shopping_app.model.Product;
 import com.subodh.shopping_app.repository.ImageRepository;
+import com.subodh.shopping_app.service.product.ProductService;
 import com.subodh.shopping_app.service.product.ProductServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,20 +25,20 @@ public class ImageServiceImpl implements  ImageService{
 
     private final ImageRepository imageRepository;
 
-    private final ProductServiceImpl productService;
+    private final ProductService productService;
 
     @Override
     public Image getImageById(Long id) {
         return imageRepository.
                 findById(id).
                 orElseThrow(() ->
-                        new ResourseNotFound("Image not found at Id " + id));
+                        new ResourceNotFoundException("Image not found at Id " + id));
     }
 
     @Override
     public void deleteImageById(Long id) {
         imageRepository.findById(id).ifPresentOrElse(imageRepository::delete,
-                () -> { throw  new ResourseNotFound("Image not found at Id " + id); } );
+                () -> { throw  new ResourceNotFoundException("Image not found at Id " + id); } );
     }
 
     @Override

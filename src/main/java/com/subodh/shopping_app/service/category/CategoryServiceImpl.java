@@ -1,7 +1,8 @@
 package com.subodh.shopping_app.service.category;
 
 import com.subodh.shopping_app.exceptions.AlreadyExistsException;
-import com.subodh.shopping_app.exceptions.ResourseNotFound;
+
+import com.subodh.shopping_app.exceptions.ResourceNotFoundException;
 import com.subodh.shopping_app.model.Category;
 import com.subodh.shopping_app.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public Category getCategoryById(Long id) {
         return categoryRepository.findById(id).
-                orElseThrow(() -> new ResourseNotFound("Category not FOUND"));
+                orElseThrow(() -> new ResourceNotFoundException("Category not FOUND"));
     }
 
     @Override
@@ -44,12 +45,12 @@ public class CategoryServiceImpl implements CategoryService{
                 map(oldcategory -> {
                     oldcategory.setName(category.getName());
                     return categoryRepository.save(oldcategory);
-                }).orElseThrow(() -> new ResourseNotFound("Category Not Found"));
+                }).orElseThrow(() -> new ResourceNotFoundException("Category Not Found"));
     }
 
     @Override
     public void deleteCategoryById(Long id) {
        categoryRepository.findById(id).ifPresentOrElse(categoryRepository :: delete,
-                () -> { throw new ResourseNotFound("Category Not FOUND");});
+                () -> { throw new ResourceNotFoundException("Category Not FOUND");});
     }
 }
